@@ -60,10 +60,14 @@ public class StoreRedirectPlugin implements MethodCallHandler, FlutterPlugin, Ac
         appPackageName = this.activity.getPackageName();
       }
 
-      Intent marketIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName));
-      marketIntent.addFlags(
-          Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_NEW_DOCUMENT | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
-      this.activity.startActivity(marketIntent);
+      Intent intent = new Intent(Intent.ACTION_VIEW);
+      intent.setData(Uri.parse("https://play.google.com/store/apps/details?id="+appPackageName));
+      intent.setPackage(appPackageName);
+      startActivity(intent);
+//       Intent marketIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName));
+//       marketIntent.addFlags(
+//           Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_NEW_DOCUMENT | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+//       this.activity.startActivity(marketIntent);
 
       result.success(null);
     } else {
